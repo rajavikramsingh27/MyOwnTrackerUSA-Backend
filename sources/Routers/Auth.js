@@ -6,6 +6,7 @@ const AuthController = require('../Controllers/Auth')
 
 router.post('/signup', AuthController.signup)
 router.post('/signin', AuthController.signin)
+router.post('/updateProfile', AuthController.auth, AuthController.updateProfile)
 router.post('/changePassword', AuthController.auth, AuthController.changePassword)
 router.post('/resetPassword', AuthController.resetPassword)
 router.post('/setPasswordFromSentLinkOnMail', AuthController.setPasswordFromSentLinkOnMail)

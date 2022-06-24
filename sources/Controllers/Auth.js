@@ -6,6 +6,8 @@ const nodemailer = require('nodemailer')
 const Response = require('../Responses/Response')
 const Constants = require('../Global/Constants')
 const Filters = require('../Global/Filters')
+const FileUpload = require('../Global/FileUpload')
+const path = require("path")
 
 
 class AuthController {
@@ -43,8 +45,20 @@ class AuthController {
     }
 
     async signinSocial(request, response) {
-        const { firstName, lastName, email, password,
-            gender, dateOfBirth, termsAndPolicy } = request.body
+        const { profilePicture, name, email, } = request.body
+
+        if (!profilePicture || !name || !email) {
+            return response.json(Response.fail(
+                'Please add all the fields In Body Parameters',
+                {
+                    'Body Parameters Fields': {
+                        profilePicture: 'String',
+                        name: 'String',
+                        email: 'String',
+                    }
+                }
+            ))
+        }
 
         try {
             const userExist = await User.findOne({ email: email })
@@ -58,7 +72,7 @@ class AuthController {
             }
         } catch (error) {
             return response.json(Response.fail(
-                'Password is not bcrypting...',
+                'Error in finding UserExist...',
                 error.message
             ))
         }
@@ -135,7 +149,7 @@ class AuthController {
 
             return response.json(Response.success(
                 'Success',
-                { token, user:  Filters.filterUser(created)},
+                { token, user: Filters.filterUser(created) },
             ))
         } catch (error) {
             return response.json(Response.fail(
@@ -194,15 +208,77 @@ class AuthController {
 
     }
 
+    async updateProfile(request, response, next) {
+        const allowedExtensions = /png|jpeg|jpg/
+
+        const { profilePicture, name, email, } = request.body
+
+        if (!name || !email) {
+            return response.json(Response.fail(
+                'Please add all the fields In Body Parameters',
+                {
+                    'Body Parameters Fields': {
+                        profilePicture: 'icon must be ' + allowedExtensions.toString() + ' format',
+                        name: 'String',
+                        email: 'String',
+                    }
+                }
+            ))
+        }
+
+        const { name: nameImage, data } = request.files.profilePicture
+
+        request.nameImage = nameImage
+        request.data = data
+
+        if (!allowedExtensions.test(path.extname(nameImage))) {
+            return response.json(Response.fail(
+                'Extension must be ' + allowedExtensions.toString() + ' format',
+            ))
+        }
+
+        FileUpload.uploadS33(request, response, next, async function (pictureURL) {
+            console.log(pictureURL);
+
+            const data = {
+                profilePicture: pictureURL,
+                name,
+                email,
+            }
+
+            try {
+                const details = await User.findByIdAndUpdate(
+                    { "_id": request.user._id }, data, { new: true }
+                )
+
+                return (details == null)
+                    ? response.json(Response.fail(
+                        {'message': 'User is not available'}
+                    ))
+                    : response.json(Response.success(
+                        'Success',
+                        details,
+                    ))
+            } catch (error) {
+                return response.json(Response.fail(
+                    error.message
+                ))
+            }
+        })
+    }
+
+
     async changePassword(request, response) {
         const { oldPassword, newPassword } = request.body
 
         if (!oldPassword || !newPassword) {
             return response.json(Response.fail(
-                {'Please add all the fields': {
-                    oldPassword: 'String',
-                    newPassword: 'String',
-                }}
+                {
+                    'Please add all the fields': {
+                        oldPassword: 'String',
+                        newPassword: 'String',
+                    }
+                }
             ))
         }
 
@@ -270,7 +346,7 @@ class AuthController {
                                  <h3>click on this link <a href="https://${Constants.kBaseURLLive}userID:${user._id}">Click here</a> to reset password</h>
                                  `
                 }
-                
+
                 transporter.sendMail(mailOptions, function (error, info) {
                     if (error) {
                         return response.json(Response.fail(

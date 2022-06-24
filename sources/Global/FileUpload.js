@@ -39,7 +39,7 @@ class FileUpload {
     let params = {
       // ACL: "public-read", 
       Bucket: "wen-category-pictures",
-      Key: request.name,
+      Key: request.nameImage,
       Body: request.data,
     }
 
@@ -53,15 +53,10 @@ class FileUpload {
         pictureURL(result.Location)
       }
     })
-
   }
-
 }
 
 module.exports = new FileUpload()
-
-
-
 
 
 
