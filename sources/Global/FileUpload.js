@@ -46,8 +46,8 @@ class FileUpload {
     s3.upload(params, (err, result) => {
       if (err) {
         return response.status(500).json({
-          message: "Failed to upload",
-          error: err.message,
+          message: err.message,
+          error: "Failed to upload",
         })
       } else {
         pictureURL(result.Location)

@@ -266,8 +266,7 @@ class AuthController {
             }
         })
     }
-
-
+    
     async changePassword(request, response) {
         const { oldPassword, newPassword } = request.body
 
