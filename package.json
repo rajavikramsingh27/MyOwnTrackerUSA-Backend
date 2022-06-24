@@ -4,7 +4,9 @@
   "description": "MyOwnTrackerUSA",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node sources/index.js",
+    "nodemon": "nodemon sources/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +19,17 @@
   },
   "homepage": "https://github.com/singham27/MyOwnTrackerUSA-Backend#readme",
   "dependencies": {
+    "aws-sdk": "^2.1157.0",
+    "bcrypt": "^5.0.1",
+    "concurrently": "^7.2.2",
+    "cors": "^2.8.5",
+    "create-react-app": "^1.2.1",
     "express": "^4.18.1",
-    "mongoose": "^6.4.0",
-    "node": "^18.4.0"
+    "express-fileupload": "^1.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.8",
+    "node": "^17.7.2",
+    "nodemailer": "^6.7.5",
+    "nodemon": "^2.0.16"
   }
 }
