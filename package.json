@@ -1,0 +1,24 @@
+{
+  "name": "myowntrackerusa",
+  "version": "1.0.0",
+  "description": "MyOwnTrackerUSA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/singham27/MyOwnTrackerUSA-Backend.git"
+  },
+  "author": "Raja Vikram Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/singham27/MyOwnTrackerUSA-Backend/issues"
+  },
+  "homepage": "https://github.com/singham27/MyOwnTrackerUSA-Backend#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.4.0",
+    "node": "^18.4.0"
+  }
+}
