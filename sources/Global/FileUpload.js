@@ -1,5 +1,15 @@
 
+const Response = require('../Responses/Response')
+
 const AWS = require("aws-sdk");
+const cloudinary = require('cloudinary').v2
+const streamifier = require('streamifier')
+
+cloudinary.config({
+  cloud_name: "dw8i3sfoa",
+  api_key: "173739589868424",
+  api_secret: "6RgTOHMuYF_rUqexhPiZsxVca4A"
+})
 
 AWS.config.update({
   secretAccessKey: "UVxXsRP9SDetgKf7931RAfzeR27MC8HOXcnGiTUP",
@@ -10,110 +20,59 @@ AWS.config.update({
 var s3 = new AWS.S3();
 
 class FileUpload {
-  uploadS3(request, response, next) {
-    const { originalname, buffer } = request.file
-
+  async uploadFile(request, response, next, pictureURL) {
     let params = {
       // ACL: "public-read", 
       Bucket: "wen-category-pictures",
-      Key: originalname,
-      Body: buffer,
-    }
-
-    s3.upload(params, (err, result) => {
-      if (err) {
-        return response.status(500).json({
-          message: "Failed to upload",
-          error: err.message,
-        })
-      } else {
-        // console.log(result.Location);
-        request.url = result.Location
-        next()
-      }
-    })
-
-  }
-
-  async uploadS33(request, response, next, pictureURL) {
-    let params = {
-      // ACL: "public-read", 
-      Bucket: "wen-category-pictures",
-      Key: request.nameImage,
+      Key: request.name,
       Body: request.data,
     }
 
     s3.upload(params, (err, result) => {
       if (err) {
-        return response.status(500).json({
-          message: err.message,
-          error: "Failed to upload",
-        })
+        return response.json(Response.fail(
+          error.message,
+          "Failed to upload",
+        ))
       } else {
         pictureURL(result.Location)
       }
     })
+
   }
+
+  async uploadFile(request, response, next, pictureURL) {
+    let streamUpload = (request) => {
+      return new Promise((resolve, reject) => {
+        let stream = cloudinary.uploader.upload_stream(
+          (error, result) => {
+            if (result) {
+              resolve(result);
+
+              pictureURL(result.url)
+            } else {
+              reject(error);
+
+              return response.json(Response.fail(
+                error.message,
+                "Failed to upload",
+              ))
+            }
+          }
+        );
+
+        streamifier.createReadStream(request.file.data).pipe(stream);
+      });
+    };
+
+    async function upload(request) {
+      let result = await streamUpload(request);
+    }
+
+    upload(request);
+  }
+
 }
 
 module.exports = new FileUpload()
-
-
-
-// const handleFileUpload = (request, response, next) => {
-//   const { originalname, buffer } = request.file;
-
-//   // console.log(buffer);
-
-//   let params = {
-//     // ACL: "public-read", 
-//     Bucket: "wen-category-pictures",
-//     // Bucket: "demowendemo",        
-//     Key: originalname,
-//     Body: buffer,
-//   };
-
-//   // s3.createBucket(params, (error, data) => {
-//   //     if (error) {
-//   //         console.log(error);
-
-//   //         return response.status(400).json({
-//   //             message: "Bucket creation is failed",
-//   //             error: error.message
-//   //         });
-//   //     } else {
-//   //         console.log("Bucket is create successfully.", data.Location);
-
-//   //         return response.status(200).json({
-//   //             message: "Bucket is create successfully",
-//   //             data: data.Location,
-//   //         });
-//   //     }
-//   // })
-
-//   s3.upload(params, (err, result) => {
-//     if (err) {
-//       return response.status(500).json({
-//         message: "Failed to upload",
-//         error: err.message,
-//       });
-//     } else {
-//       console.log(result.Location);
-//       request.url = result.Location
-//       next()
-
-//       //   return response.status(200).json({
-//       //       message: "File Uploaded",
-//       //       imageURL: result.Location,
-//       //       result,
-//       //     });
-//     }
-//   });
-
-// };
-
-// module.exports = {
-//   handleFileUpload,
-// };
-
 

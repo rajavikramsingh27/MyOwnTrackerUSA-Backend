@@ -225,19 +225,16 @@ class AuthController {
                 }
             ))
         }
+        
+        request.file = request.files.profilePicture
 
-        const { name: nameImage, data } = request.files.profilePicture
-
-        request.nameImage = nameImage
-        request.data = data
-
-        if (!allowedExtensions.test(path.extname(nameImage))) {
+        if (!allowedExtensions.test(path.extname(request.file.name))) {
             return response.json(Response.fail(
                 'Extension must be ' + allowedExtensions.toString() + ' format',
             ))
         }
 
-        FileUpload.uploadS33(request, response, next, async function (pictureURL) {
+        FileUpload.uploadFile(request, response, next, async function (pictureURL) {
             console.log(pictureURL);
 
             const data = {
