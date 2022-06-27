@@ -7,9 +7,10 @@ const cors = require('cors')
 const fileupload = require("express-fileupload");
 
 const Constants = require('./Global/Constants');
+const Response = require('./Responses/Response')
 const routerAuth = require('./Routers/Auth')
 const routerCategory = require('./Routers/Category')
-const Response = require('./Responses/Response')
+const routerTax = require('./Routers/Tax')
 
 app.use(cors())
 if (process.env.NODE_ENV == 'production') {
@@ -24,6 +25,7 @@ app.use(fileupload({
 
 app.use(routerAuth)
 app.use(routerCategory)
+app.use(routerTax)
 
 // app.post("/upload", upload.single("file"), FileUpload.handleFileUpload);
 

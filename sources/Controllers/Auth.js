@@ -15,7 +15,9 @@ class AuthController {
         const { authorization } = request.headers
 
         if (!authorization) {
-            return response.json(Response.message('Use header (Authorization:Bearer YourToken)'))
+            return response.json(Response.fail(
+                'Use header (Authorization:Bearer YourToken)',
+            ))
         }
 
         const token = authorization.replace("Bearer ", "")
@@ -225,7 +227,7 @@ class AuthController {
                 }
             ))
         }
-        
+
         request.file = request.files.profilePicture
 
         if (!allowedExtensions.test(path.extname(request.file.name))) {
@@ -250,7 +252,7 @@ class AuthController {
 
                 return (details == null)
                     ? response.json(Response.fail(
-                        {'message': 'User is not available'}
+                        { 'message': 'User is not available' }
                     ))
                     : response.json(Response.success(
                         'Success',
@@ -263,7 +265,7 @@ class AuthController {
             }
         })
     }
-    
+
     async changePassword(request, response) {
         const { oldPassword, newPassword } = request.body
 
