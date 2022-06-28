@@ -219,7 +219,6 @@ class CategoryController {
                     error.message,
                 ))
             } else {
-                // friendDetails = result
                 return response.json(Response.success(
                     'Category is deleted successfully.',
                     result,
