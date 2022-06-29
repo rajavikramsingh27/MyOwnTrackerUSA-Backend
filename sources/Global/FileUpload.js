@@ -20,26 +20,26 @@ AWS.config.update({
 var s3 = new AWS.S3();
 
 class FileUpload {
-  async uploadFile(request, response, next, pictureURL) {
-    let params = {
-      // ACL: "public-read", 
-      Bucket: "wen-category-pictures",
-      Key: request.name,
-      Body: request.data,
-    }
+  // async uploadFile(request, response, next, pictureURL) {
+  //   let params = {
+  //     // ACL: "public-read", 
+  //     Bucket: "wen-category-pictures",
+  //     Key: request.name,
+  //     Body: request.data,
+  //   }
 
-    s3.upload(params, (err, result) => {
-      if (err) {
-        return response.json(Response.fail(
-          error.message,
-          "Failed to upload",
-        ))
-      } else {
-        pictureURL(result.Location)
-      }
-    })
+  //   s3.upload(params, (err, result) => {
+  //     if (err) {
+  //       return response.json(Response.fail(
+  //         error.message,
+  //         "Failed to upload",
+  //       ))
+  //     } else {
+  //       pictureURL(result.Location)
+  //     }
+  //   })
 
-  }
+  // }
 
   async uploadFile(request, response, next, pictureURL) {
     let streamUpload = (request) => {

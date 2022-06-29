@@ -139,12 +139,9 @@ class CategoryController {
         try {
             detailsMe = await Client.findOne({ 'userID': request.user.id })
 
-            return response.json(detailsMe)
-
             return response.json(Response.success(
                 'Success',
-                // detailsMe ? detailsMe.client : [],
-                detailsMe ? detailsMe : [],
+                detailsMe ? detailsMe.client : [],
             ))
         } catch (error) {
             return response.json(Response.fail(
