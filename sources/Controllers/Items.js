@@ -48,8 +48,7 @@ class ItemController {
                 ))
             }
         }
-
-
+        
         const dictTax = JSON.parse(tax)
         console.log(dictTax);
 
