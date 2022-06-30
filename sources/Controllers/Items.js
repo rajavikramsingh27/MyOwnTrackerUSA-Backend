@@ -7,20 +7,22 @@ class ItemController {
     async createItem(request, response, next) {
         const { name, quantity, rate, description, tax } = request.body
 
-        if (!name || !quantity || !rate || !tax || !description) {
-            return response.json(Response.fail(
-                'Please add all the fields In Body Parameters',
-                {
-                    'Body Parameters Fields': {
-                        name: 'String',
-                        quantity: 'Number',
-                        rate: 'Number',
-                        tax: 'String',
-                        description: 'String',
-                    }
-                }
-            ))
-        }
+        console.log(request.body);
+
+        // if (!name || !quantity || !rate || !tax || !description) {
+        //     return response.json(Response.fail(
+        //         'Please add all the fields In Body Parameters',
+        //         {
+        //             'Body Parameters Fields': {
+        //                 name: 'String',
+        //                 quantity: 'Number',
+        //                 rate: 'Number',
+        //                 tax: 'String',
+        //                 description: 'String',
+        //             }
+        //         }
+        //     ))
+        // }
 
         var details
 
