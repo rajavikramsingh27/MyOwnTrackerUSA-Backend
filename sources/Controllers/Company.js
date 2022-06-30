@@ -84,7 +84,7 @@ class CategoryController {
         }
 
         const basicInfo = {
-            log: request.body.logo,
+            logo: request.body.logo,
             name: request.body.name,
             phone_1: request.body.phone_1,
             phone_2: request.body.phone_2,
