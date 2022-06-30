@@ -48,7 +48,7 @@ class ItemController {
                 ))
             }
         }
-        
+
         const dictTax = JSON.parse(tax)
         console.log(dictTax);
 
@@ -74,7 +74,7 @@ class ItemController {
             } else {
                 return response.json(Response.success(
                     'Item is created successfully.',
-                    result.tax,
+                    result.item,
                 ))
             }
         })

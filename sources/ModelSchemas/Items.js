@@ -6,8 +6,8 @@ const items = mongoose.Schema({
     userID: String,
     item: [{
         name: String,
-        quantity: Number,
-        rate: Number,    
+        quantity: String,
+        rate: String,    
         tax: Object,
         description: String,    
         createdTime: {
