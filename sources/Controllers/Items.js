@@ -136,7 +136,7 @@ class ItemController {
 
         Item.findOneAndUpdate(
             { 'userID': request.user.id }, {
-            $pull: { tax: data }
+            $pull: { item: data }
         }, {
             new: true
         }).exec((error, result) => {
@@ -148,7 +148,7 @@ class ItemController {
             } else {
                 return response.json(Response.success(
                     'Item is deleted successfully.',
-                    result.tax,
+                    result.item,
                 ))
             }
         })
