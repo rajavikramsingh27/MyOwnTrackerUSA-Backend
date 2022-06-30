@@ -33,21 +33,9 @@ app.use(routerCompany)
 app.use(routerGenricContract)
 
 app.post("/uploadImage", (request, response, next) => {
-    const { image } = request.body
-    if (!image) {
-        return response.json(Response.fail(
-            'Please add all the fields In Body Parameters',
-            {
-                'Body Parameters Fields': {
-                    image: "String",
-                }
-            }
-        ))
-    }
-
-    const allowedExtensions = /png|jpeg|jpg/
-
     request.file = request.files.image
+    
+    const allowedExtensions = /png|jpeg|jpg/
 
     if (!allowedExtensions.test(path.extname(request.file.name))) {
         return response.json(Response.fail(

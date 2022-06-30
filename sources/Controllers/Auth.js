@@ -9,7 +9,6 @@ const Filters = require('../Global/Filters')
 const FileUpload = require('../Global/FileUpload')
 const path = require("path")
 
-
 class AuthController {
     auth(request, response, next) {
         const { authorization } = request.headers
@@ -230,7 +229,7 @@ class AuthController {
     async updateProfile(request, response, next) {
         const allowedExtensions = /png|jpeg|jpg/
 
-        const { profilePicture, name, email, } = request.body
+        const { name, email, } = request.body
 
         if (!name || !email) {
             return response.json(Response.fail(
@@ -256,15 +255,17 @@ class AuthController {
         FileUpload.uploadFile(request, response, next, async function (pictureURL) {
             console.log(pictureURL);
 
-            const data = {
+            const dataForUpdate = {
                 profilePicture: pictureURL,
                 name,
                 email,
             }
 
             try {
-                const details = await User.findByIdAndUpdate(
-                    { "_id": request.user._id }, data, { new: true }
+                const details = await User.findOneAndUpdate(
+                    { "_id": request.user._id }, {
+                    $set: dataForUpdate
+                }, { new: true }
                 )
 
                 return (details == null)
