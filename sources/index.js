@@ -34,7 +34,6 @@ app.use(routerGenricContract)
 
 app.post("/uploadImage", (request, response, next) => {
     request.file = request.files.image
-    
     const allowedExtensions = /png|jpeg|jpg/
 
     if (!allowedExtensions.test(path.extname(request.file.name))) {

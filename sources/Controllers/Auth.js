@@ -213,7 +213,7 @@ class AuthController {
         var detailsMe
 
         try {
-            detailsMe = await User.findOne({ 'userID': request.user.id })
+            detailsMe = await User.findById({ '_id': request.user.id })
             return response.json(Response.success(
                 'Success',
                 detailsMe ? detailsMe : [],
@@ -245,6 +245,7 @@ class AuthController {
         }
 
         request.file = request.files.profilePicture
+        console.log(request.file);
 
         if (!allowedExtensions.test(path.extname(request.file.name))) {
             return response.json(Response.fail(
