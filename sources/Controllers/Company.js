@@ -139,7 +139,7 @@ class CategoryController {
             detailsMe = await Company.findOne({ 'userID': request.user.id })
             return response.json(Response.success(
                 'Success',
-                detailsMe ? detailsMe : [],
+                detailsMe ? detailsMe.company : [],
             ))
         } catch (error) {
             return response.json(Response.fail(
@@ -152,12 +152,11 @@ class CategoryController {
 
     async updateCompany(request, response) {
         const {
-            companyID, logo, licenceDoc, insuranceDoc,
+            logo, licenceDoc, insuranceDoc,
             name, phone_1, phone_2, address_1, address_2, city, state_Province, zip_Postal_Code, business,
             websiteURL, googleBusinessURL, facebookURL, InstagramURL
         } = request.body
         if (
-            !companyID ||
             !name ||
             !phone_1 ||
             !phone_2 ||
@@ -174,7 +173,6 @@ class CategoryController {
                 'Please add all the fields In Body Parameters',
                 {
                     'Body Parameters Fields': {
-                        companyID: 'String',
                         logo: "String",
                         licenceDoc: "String",
                         InsuranceDoc: "String",
@@ -197,17 +195,6 @@ class CategoryController {
                 }
             ))
         }
-
-        // var detailsMe
-
-        // try {
-        //     detailsMe = await Company.findOne({ 'userID': request.user.id })
-        // } catch (error) {
-        //     return response.json(Response.fail(
-        //         'Error in findOne',
-        //         error.message,
-        //     ))
-        // }
 
         const basicInfo = {
             name: request.body.name,
@@ -252,7 +239,7 @@ class CategoryController {
 
             return response.json(Response.success(
                 'Company is updated successfully.',
-                data,
+                data.company,
             ))
         } catch (error) {
             return response.json(Response.fail(

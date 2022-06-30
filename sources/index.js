@@ -13,6 +13,7 @@ const routerTax = require('./Routers/Tax')
 const routerItem = require('./Routers/Item')
 const routerClient = require('./Routers/Client')
 const routerCompany = require('./Routers/Company')
+const routerGenricContract = require('./Routers/GenricContract')
 
 const FileUpload = require('./Global/FileUpload')
 const path = require("path")
@@ -29,6 +30,7 @@ app.use(routerTax)
 app.use(routerItem)
 app.use(routerClient)
 app.use(routerCompany)
+app.use(routerGenricContract)
 
 app.post("/uploadImage", (request, response, next) => {
     const { image } = request.body
