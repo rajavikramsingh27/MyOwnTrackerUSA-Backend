@@ -16,6 +16,7 @@ class CategoryController {
             websiteURL, googleBusinessURL, facebookURL, InstagramURL
         } = request.body
         if (
+            !logo || 
             !name ||
             !phone_1 ||
             !phone_2 ||
@@ -83,6 +84,7 @@ class CategoryController {
         }
 
         const basicInfo = {
+            log: request.body.logo,
             name: request.body.name,
             phone_1: request.body.phone_1,
             phone_2: request.body.phone_2,
