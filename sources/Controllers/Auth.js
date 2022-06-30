@@ -210,6 +210,23 @@ class AuthController {
 
     }
 
+    async readProfile(request, response) {
+        var detailsMe
+
+        try {
+            detailsMe = await User.findOne({ 'userID': request.user.id })
+            return response.json(Response.success(
+                'Success',
+                detailsMe ? detailsMe : [],
+            ))
+        } catch (error) {
+            return response.json(Response.fail(
+                'Error in findOne',
+                error.message,
+            ))
+        }
+    }
+
     async updateProfile(request, response, next) {
         const allowedExtensions = /png|jpeg|jpg/
 
