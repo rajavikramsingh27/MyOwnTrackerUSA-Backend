@@ -52,7 +52,7 @@ class ItemController {
         }
 
         const dictTax = JSON.parse(tax)
-        
+
         const itemData = {
             name: name,
             quantity: quantity,
@@ -103,6 +103,66 @@ class ItemController {
             ))
         }
 
+    }
+
+    async updateItem(request, response, next) {
+
+        const { itemID, name, quantity, rate, description, tax, valueAmount } = request.body
+        console.log(request.body);
+
+        if (!itemID, !name || !quantity || !rate || !tax || !description) {
+            return response.json(Response.fail(
+                'Please add all the fields In Body Parameters',
+                {
+                    'Body Parameters Fields': {
+                        itemID: 'String',
+                        name: 'String',
+                        quantity: 'Number',
+                        rate: 'Number',
+                        tax: 'String',
+                        description: 'String',
+                    }
+                }
+            ))
+        }
+
+        const dictTax = JSON.parse(tax)
+
+        const itemData = {
+            name: name,
+            quantity: quantity,
+            rate: rate,
+            tax: dictTax,
+            description: description,
+            valueAmount: valueAmount
+        }
+
+        console.log(itemData);
+        console.log(request.user._id);
+        console.log(itemID);
+
+        try {
+            const details = await Item.findOneAndUpdate({
+                "userID": request.user._id,
+                "item._id": itemID
+            }, {
+                $set: { 'item': itemData }
+            }, { new: true }
+            )
+
+            return (details == null)
+                ? response.json(Response.fail(
+                    { 'message': 'Item is not available' }
+                ))
+                : response.json(Response.success(
+                    'Success',
+                    details,
+                ))
+        } catch (error) {
+            return response.json(Response.fail(
+                error.message
+            ))
+        }
     }
 
     async deleteItem(request, response) {

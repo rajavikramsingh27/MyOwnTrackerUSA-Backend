@@ -8,6 +8,7 @@ const AuthController = require('../Controllers/Auth')
 
 router.post('/createItem', AuthController.auth, Items.createItem)
 router.get('/listItem', AuthController.auth, Items.listItem)
+router.post('/updateItem', AuthController.auth, Items.updateItem)
 router.post('/deleteItem', AuthController.auth, Items.deleteItem)
 
 
