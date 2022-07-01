@@ -100,20 +100,21 @@ class CategoryController {
         const {
             name, days
         } = request.body
-        if (
-            !name ||
-            !days
-        ) {
-            return response.json(Response.fail(
-                'Please add all the fields In Body Parameters',
-                {
-                    'Body Parameters Fields': {
-                        name: "String",
-                        days: "int",
-                    }
-                }
-            ))
-        }
+
+        // if (
+        //     !name ||
+        //     !days
+        // ) {
+        //     return response.json(Response.fail(
+        //         'Please add all the fields In Body Parameters',
+        //         {
+        //             'Body Parameters Fields': {
+        //                 name: "String",
+        //                 days: "int",
+        //             }
+        //         }
+        //     ))
+        // }
 
         const dataForUpdate = {
             'userID': request.user.id,
