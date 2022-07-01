@@ -10,6 +10,7 @@ const items = mongoose.Schema({
         rate: String,    
         tax: Object,
         description: String,    
+        valueAmount: String,
         createdTime: {
             type: Date,
             default: Date.now
