@@ -155,7 +155,7 @@ class ItemController {
                     { 'message': 'Item is not available' }
                 ))
                 : response.json(Response.success(
-                    'Success',
+                    'This Item is updated successfully.',
                     details,
                 ))
         } catch (error) {
