@@ -5,7 +5,7 @@ const Response = require('../Responses/Response')
 
 class ItemController {
     async createItem(request, response, next) {
-        const { name, quantity, rate, description, tax } = request.body
+        const { name, quantity, rate, description, tax, valueAmount } = request.body
 
         console.log(request.body);
 
@@ -52,15 +52,17 @@ class ItemController {
         }
 
         const dictTax = JSON.parse(tax)
-        console.log(dictTax);
-
+        
         const itemData = {
-            name: request.body.name,
-            quantity: request.body.quantity,
-            rate: request.body.rate,
+            name: name,
+            quantity: quantity,
+            rate: rate,
             tax: dictTax,
-            description: request.body.description,
+            description: description,
+            valueAmount: valueAmount
         }
+
+        console.log(itemData);
 
         Item.findOneAndUpdate(
             { 'userID': request.user.id }, {
