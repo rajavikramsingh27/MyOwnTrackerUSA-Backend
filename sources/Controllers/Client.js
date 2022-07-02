@@ -108,6 +108,8 @@ class CategoryController {
             service_zip_Postal_Code: request.body.service_zip_Postal_Code,
         }
 
+
+        
         const clientData = {
             basicInfo,
             billingInfo,

@@ -7,6 +7,7 @@ const client = mongoose.Schema({
         basicInfo: Object,
         billingInfo: Object,
         serviceAddress: Object,
+        notes: String,
         createdTime: {
             type: Date,
             default: Date.now
