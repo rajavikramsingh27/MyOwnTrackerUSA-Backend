@@ -9,6 +9,7 @@ class CategoryController {
             name, email, mobileNumber, homeNumber,
             billing_address_1, billing_address_2, billing_state_Province, billing_city, billing_zip_Postal_Code,
             service_address_1, service_address_2, service_state_Province, service_city, service_zip_Postal_Code,
+            notes,
         } = request.body
 
         if (
@@ -27,7 +28,8 @@ class CategoryController {
             !service_address_2 ||
             !service_city ||
             !service_state_Province ||
-            !service_zip_Postal_Code
+            !service_zip_Postal_Code ||
+            !notes
         ) {
             return response.json(Response.fail(
                 'Please add all the fields In Body Parameters',
@@ -49,6 +51,8 @@ class CategoryController {
                         service_city: 'String',
                         service_state_Province: 'String',
                         service_zip_Postal_Code: 'String',
+
+                        notes: 'String'
                     }
                 }
             ))
@@ -108,6 +112,7 @@ class CategoryController {
             basicInfo,
             billingInfo,
             serviceAddress,
+            notes
         }
 
         Client.findOneAndUpdate(
