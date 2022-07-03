@@ -6,6 +6,9 @@ const app = express();
 const cors = require('cors')
 const fileupload = require("express-fileupload");
 
+const FileUpload = require('./Global/FileUpload')
+const path = require("path")
+
 const Constants = require('./Global/Constants');
 const Response = require('./Responses/Response')
 const routerAuth = require('./Routers/Auth')
@@ -14,9 +17,9 @@ const routerItem = require('./Routers/Item')
 const routerClient = require('./Routers/Client')
 const routerCompany = require('./Routers/Company')
 const routerGenricContract = require('./Routers/GenricContract')
+const routerEmailMessages = require('./Routers/EmailMessages')
 
-const FileUpload = require('./Global/FileUpload')
-const path = require("path")
+
 
 app.use(cors())
 app.use(express.json({ extended: false, limit: '500mb' }))
@@ -31,6 +34,7 @@ app.use(routerItem)
 app.use(routerClient)
 app.use(routerCompany)
 app.use(routerGenricContract)
+app.use(routerEmailMessages)
 
 app.post("/uploadImage", (request, response, next) => {
     request.file = request.files.image
@@ -51,7 +55,6 @@ app.post("/uploadImage", (request, response, next) => {
         ))
     })
 })
-
 
 app.get("/", (request, response) => {
     const dictResData = {

@@ -2,9 +2,6 @@
 
 const Company = require("../ModelSchemas/Company")
 const Response = require('../Responses/Response')
-const FileUpload = require('../Global/FileUpload')
-const path = require("path")
-
 
 
 class CategoryController {

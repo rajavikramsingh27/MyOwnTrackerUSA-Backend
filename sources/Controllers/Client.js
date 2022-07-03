@@ -254,7 +254,7 @@ class CategoryController {
             service_state_Province: request.body.service_state_Province,
             service_zip_Postal_Code: request.body.service_zip_Postal_Code,
         }
-
+        console.log(request.body.clientID);
         try {
             const data = await Client.findOneAndUpdate(
                 {
@@ -265,7 +265,7 @@ class CategoryController {
                     "client.$.basicInfo": basicInfo,
                     "client.$.billingInfo": billingInfo,
                     "client.$.serviceAddress": serviceAddress,
-                    "client.$.notes": notes,                    
+                    "client.$.notes": notes,
                 }
             }, {
                 new: true
