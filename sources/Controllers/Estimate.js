@@ -40,14 +40,20 @@ class EstimateController {
         }
         
         const dictToSave = {
-            client: JSON.parse(JSON.parse(client)),
-            items: JSON.parse(JSON.parse(items)),
+            // client: JSON.parse(JSON.parse(client)),
+            // items: JSON.parse(JSON.parse(items)),
+            // paymentSchedule: JSON.parse(JSON.parse(paymentSchedule)),
+            // contract: JSON.parse(JSON.parse(contract)),
+
+            client: JSON.parse(client),
+            items: JSON.parse(items),
+            paymentSchedule: JSON.parse(paymentSchedule),
+            contract: JSON.parse(contract),
+
             subTotal,
             tax,
             amountTotal,
-            paymentSchedule: JSON.parse(JSON.parse(paymentSchedule)),
             notes,
-            contract: JSON.parse(JSON.parse(contract)),
             estimateDocID,
             date,
             po,
