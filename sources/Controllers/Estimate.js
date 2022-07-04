@@ -8,7 +8,7 @@ class EstimateController {
     async createEstimate(request, response, next) {
         const {
             client, items, subTotal, tax, amountTotal,
-            valueAmount, paymentSchedule, notes,
+            paymentSchedule, notes,
             contract, estimateDocID, date, po, states
         } = request.body
 
@@ -45,7 +45,6 @@ class EstimateController {
             subTotal,
             tax,
             amountTotal,
-            valueAmount,
             paymentSchedule: JSON.parse(JSON.parse(paymentSchedule)),
             notes,
             contract: JSON.parse(JSON.parse(contract)),
@@ -101,7 +100,7 @@ class EstimateController {
         const {
             estimateID,
             client, items, subTotal, tax, amountTotal,
-            valueAmount, paymentSchedule, notes,
+            paymentSchedule, notes,
             contract, estimateDocID, date, po, states
         } = request.body
 
@@ -122,7 +121,6 @@ class EstimateController {
             subTotal,
             tax,
             amountTotal,
-            valueAmount,
             paymentSchedule: JSON.parse(JSON.parse(paymentSchedule)),
             notes,
             contract: JSON.parse(JSON.parse(contract)),

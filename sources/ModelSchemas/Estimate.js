@@ -10,7 +10,6 @@ const estimate = mongoose.Schema({
         subTotal: Number,    
         tax: Number,
         amountTotal: Number,    
-        valueAmount: Number,
         paymentSchedule: Object,
         notes: String,
         contract: Object,
