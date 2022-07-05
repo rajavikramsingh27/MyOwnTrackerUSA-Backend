@@ -9,12 +9,13 @@ class CategoryController {
 
         const {
             logo, licenceDoc, insuranceDoc,
-            name, phone_1, phone_2, address_1, address_2, city, state_Province, zip_Postal_Code, business,
+            name, email, phone_1, phone_2, address_1, address_2, city, state_Province, zip_Postal_Code, business,
             websiteURL, googleBusinessURL, facebookURL, InstagramURL
         } = request.body
         if (
             !logo || 
             !name ||
+            !email ||
             !phone_1 ||
             !phone_2 ||
 
@@ -35,6 +36,7 @@ class CategoryController {
                         InsuranceDoc: "String",
 
                         name: "String",
+                        email: "String",
                         phone_1: "String",
                         phone_2: "String",
                         address_1: "String",
@@ -81,16 +83,17 @@ class CategoryController {
         }
 
         const basicInfo = {
-            logo: request.body.logo,
-            name: request.body.name,
-            phone_1: request.body.phone_1,
-            phone_2: request.body.phone_2,
-            address_1: request.body.address_1,
-            address_2: request.body.address_2,
-            city: request.body.city,
-            state_Province: request.body.state_Province,
-            zip_Postal_Code: request.body.zip_Postal_Code,
-            business: request.body.business,
+            logo: logo,
+            name: name,
+            email: email,
+            phone_1: phone_1,
+            phone_2: phone_2,
+            address_1: address_1,
+            address_2: address_2,
+            city: city,
+            state_Province: state_Province,
+            zip_Postal_Code: zip_Postal_Code,
+            business: business,
         }
 
         const licence_Insurance = {
@@ -152,11 +155,12 @@ class CategoryController {
     async updateCompany(request, response) {
         const {
             logo, licenceDoc, insuranceDoc,
-            name, phone_1, phone_2, address_1, address_2, city, state_Province, zip_Postal_Code, business,
+            name, email, phone_1, phone_2, address_1, address_2, city, state_Province, zip_Postal_Code, business,
             websiteURL, googleBusinessURL, facebookURL, InstagramURL
         } = request.body
         if (
             !name ||
+            !email ||
             !phone_1 ||
             !phone_2 ||
 
@@ -177,6 +181,7 @@ class CategoryController {
                         InsuranceDoc: "String",
 
                         name: "String",
+                        email: "String",
                         phone_1: "String",
                         phone_2: "String",
                         address_1: "String",
@@ -196,15 +201,16 @@ class CategoryController {
         }
 
         const basicInfo = {
-            name: request.body.name,
-            phone_1: request.body.phone_1,
-            phone_2: request.body.phone_2,
-            address_1: request.body.address_1,
-            address_2: request.body.address_2,
-            city: request.body.city,
-            state_Province: request.body.state_Province,
-            zip_Postal_Code: request.body.zip_Postal_Code,
-            business: request.body.business,
+            name: name,
+            email: email,
+            phone_1: phone_1,
+            phone_2: phone_2,
+            address_1: address_1,
+            address_2: address_2,
+            city: city,
+            state_Province: state_Province,
+            zip_Postal_Code: zip_Postal_Code,
+            business: business,
         }
 
         const licence_Insurance = {
