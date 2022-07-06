@@ -9,7 +9,7 @@ class EstimateController {
         const {
             client, items, subTotal, tax, amountTotal,
             paymentSchedule, notes,
-            contract, estimateDocID, date, po, states
+            contract, estimateDocID, date, po, states, states_name
         } = request.body
 
         var detailsMe
@@ -58,6 +58,7 @@ class EstimateController {
             date,
             po,
             states,
+            states_name,
         }
 
         Estimate.findOneAndUpdate(
@@ -107,7 +108,7 @@ class EstimateController {
             estimateID,
             client, items, subTotal, tax, amountTotal,
             paymentSchedule, notes,
-            contract, estimateDocID, date, po, states
+            contract, estimateDocID, date, po, states, states_name,
         } = request.body
 
         var detailsMe
@@ -140,6 +141,7 @@ class EstimateController {
             date,
             po,
             states,
+            states_name,
         }
 
         console.log(dictToSave)
@@ -153,6 +155,90 @@ class EstimateController {
                 }, {
                 $set: {
                     "estimate.$": dictToSave
+                }
+            }, {
+                new: true
+            })
+
+            return response.json(Response.success(
+                'Estimate is updated successfully.',
+                data,
+            ))
+        } catch (error) {
+            return response.json(Response.fail(
+                'Error in findOneAndUpdate',
+                error.message,
+            ))
+        }
+    }
+
+    async updateEstimateStates(request, response) {
+        const {
+            estimateID,
+            states,
+        } = request.body
+
+        var detailsMe
+
+        try {
+            detailsMe = await Estimate.findOne({ 'userID': request.user.id })
+        } catch (error) {
+            return response.json(Response.fail(
+                'Error in findOne',
+                error.message,
+            ))
+        }
+
+        try {
+            const data = await Estimate.findOneAndUpdate(
+                {
+                    'userID': request.user.id,
+                    "estimate._id": estimateID
+                }, {
+                $set: {
+                    "estimate.$.states": states
+                }
+            }, {
+                new: true
+            })
+
+            return response.json(Response.success(
+                'Estimate is updated successfully.',
+                data,
+            ))
+        } catch (error) {
+            return response.json(Response.fail(
+                'Error in findOneAndUpdate',
+                error.message,
+            ))
+        }
+    }
+
+    async updateEstimateStatesName(request, response) {
+        const {
+            estimateID,
+            states_name,
+        } = request.body
+
+        var detailsMe
+
+        try {
+            detailsMe = await Estimate.findOne({ 'userID': request.user.id })
+        } catch (error) {
+            return response.json(Response.fail(
+                'Error in findOne',
+                error.message,
+            ))
+        }
+
+        try {
+            const data = await Estimate.findOneAndUpdate(
+                {
+                    'userID': request.user.id,
+                    "estimate._id": estimateID
+                }, {
+                $set: {
+                    "estimate.$.states_name": states_name
                 }
             }, {
                 new: true

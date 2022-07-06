@@ -16,6 +16,7 @@ const estimate = mongoose.Schema({
         estimateDocID: String,
         date: String,
         po: String,
+        states_name: String,
         states: String,
         createdTime: {
             type: Date,
