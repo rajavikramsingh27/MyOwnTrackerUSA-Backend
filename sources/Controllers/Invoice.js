@@ -69,7 +69,7 @@ class InvoiceController {
                 ))
             } else {
                 return response.json(Response.success(
-                    'Estimate is created successfully.',
+                    'Invoice is created successfully.',
                     result.estimate,
                 ))
             }
@@ -144,7 +144,7 @@ class InvoiceController {
             })
 
             return response.json(Response.success(
-                'Estimate is updated successfully.',
+                'Invoice is updated successfully.',
                 data,
             ))
         } catch (error) {
@@ -161,16 +161,16 @@ class InvoiceController {
             states,
         } = request.body
 
-        var detailsMe
+        // var detailsMe
 
-        try {
-            detailsMe = await Invoice.findOne({ 'userID': request.user.id })
-        } catch (error) {
-            return response.json(Response.fail(
-                'Error in findOne',
-                error.message,
-            ))
-        }
+        // try {
+        //     detailsMe = await Invoice.findOne({ 'userID': request.user.id })
+        // } catch (error) {
+        //     return response.json(Response.fail(
+        //         'Error in findOne',
+        //         error.message,
+        //     ))
+        // }
 
         try {
             const data = await Estimate.findOneAndUpdate(
@@ -186,7 +186,7 @@ class InvoiceController {
             })
 
             return response.json(Response.success(
-                'Estimate is updated successfully.',
+                'Invoice is updated successfully.',
                 data,
             ))
         } catch (error) {
@@ -205,14 +205,14 @@ class InvoiceController {
 
         var detailsMe
 
-        try {
-            detailsMe = await Invoice.findOne({ 'userID': request.user.id })
-        } catch (error) {
-            return response.json(Response.fail(
-                'Error in findOne',
-                error.message,
-            ))
-        }
+        // try {
+        //     detailsMe = await Invoice.findOne({ 'userID': request.user.id })
+        // } catch (error) {
+        //     return response.json(Response.fail(
+        //         'Error in findOne',
+        //         error.message,
+        //     ))
+        // }
 
         try {
             const data = await Invoice.findOneAndUpdate(
@@ -228,7 +228,7 @@ class InvoiceController {
             })
 
             return response.json(Response.success(
-                'Estimate is updated successfully.',
+                'Invoice is updated successfully.',
                 data,
             ))
         } catch (error) {
@@ -264,7 +264,7 @@ class InvoiceController {
             ))
         }
 
-        var output = detailsMe.estimate.filter(
+        var output = detailsMe.invoice.filter(
             function (value) {
                 return value.id == invoiceID
             }
@@ -285,7 +285,7 @@ class InvoiceController {
                 ))
             } else {
                 return response.json(Response.success(
-                    'Estimate is deleted successfully.',
+                    'Invoice is deleted successfully.',
                     result.estimate,
                 ))
             }
