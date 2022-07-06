@@ -70,7 +70,7 @@ class InvoiceController {
             } else {
                 return response.json(Response.success(
                     'Invoice is created successfully.',
-                    result.estimate,
+                    result.invoice,
                 ))
             }
         })
@@ -173,7 +173,7 @@ class InvoiceController {
         // }
 
         try {
-            const data = await Estimate.findOneAndUpdate(
+            const data = await Invoice.findOneAndUpdate(
                 {
                     'userID': request.user.id,
                     "invoice._id": invoiceID
@@ -272,7 +272,7 @@ class InvoiceController {
 
         const data = output[0]
 
-        Estimate.findOneAndUpdate(
+        Invoice.findOneAndUpdate(
             { 'userID': request.user.id }, {
             $pull: { invoice: data }
         }, {
@@ -286,7 +286,7 @@ class InvoiceController {
             } else {
                 return response.json(Response.success(
                     'Invoice is deleted successfully.',
-                    result.estimate,
+                    result.invoice,
                 ))
             }
         })
