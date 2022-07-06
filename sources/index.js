@@ -19,7 +19,7 @@ const routerCompany = require('./Routers/Company')
 const routerGenricContract = require('./Routers/GenricContract')
 const routerEmailMessages = require('./Routers/EmailMessages')
 const routerEstimate = require('./Routers/Estimate')
-
+const routerInvoice = require('./Routers/Invoice')
 
 app.use(cors())
 app.use(express.json({ extended: false, limit: '500mb' }))
@@ -36,6 +36,7 @@ app.use(routerCompany)
 app.use(routerGenricContract)
 app.use(routerEmailMessages)
 app.use(routerEstimate)
+app.use(routerInvoice)
 
 app.post("/uploadImage", (request, response, next) => {
     request.file = request.files.image
