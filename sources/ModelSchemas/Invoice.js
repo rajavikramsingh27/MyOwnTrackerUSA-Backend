@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 
 const invoice = mongoose.Schema({
     userID: String,
-    estimate: [{
+    invoice: [{
         client: Object,
         items: Array,
         subTotal: Number,    

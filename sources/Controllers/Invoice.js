@@ -18,7 +18,7 @@ class InvoiceController {
             detailsMe = await Invoice.findOne({ 'userID': request.user.id })
         } catch (error) {
             return response.json(Response.fail(
-                'Error in Category findOne',
+                'Error in findOne',
                 error.message,
             ))
         }
@@ -55,6 +55,8 @@ class InvoiceController {
             states,
             states_name,
         }
+
+console.log(dictToSave);
 
         Invoice.findOneAndUpdate(
             { 'userID': request.user.id }, {
