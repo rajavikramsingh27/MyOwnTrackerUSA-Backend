@@ -9,7 +9,7 @@ class InvoiceController {
         const {
             client, items, subTotal, tax, amountTotal,
             paymentSchedule, notes,
-            contract, invoiceDocID, date, po, states, states_name
+            contract, docID, date, po, states, states_name
         } = request.body
 
         var detailsMe
@@ -49,7 +49,7 @@ class InvoiceController {
             tax,
             amountTotal,
             notes,
-            invoiceDocID,
+            docID,
             date,
             po,
             states,
@@ -101,7 +101,7 @@ console.log(dictToSave);
             invoiceID,
             client, items, subTotal, tax, amountTotal,
             paymentSchedule, notes,
-            contract, invoiceDocID, date, po, states, states_name,
+            contract, docID, date, po, states, states_name,
         } = request.body
 
         var detailsMe
@@ -125,7 +125,7 @@ console.log(dictToSave);
             tax,
             amountTotal,
             notes,
-            invoiceDocID,
+            docID,
             date,
             po,
             states,

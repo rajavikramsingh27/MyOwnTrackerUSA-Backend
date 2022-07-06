@@ -9,7 +9,7 @@ class EstimateController {
         const {
             client, items, subTotal, tax, amountTotal,
             paymentSchedule, notes,
-            contract, estimateDocID, date, po, states, states_name
+            contract, docID, date, po, states, states_name
         } = request.body
 
         var detailsMe
@@ -40,11 +40,6 @@ class EstimateController {
         }
         
         const dictToSave = {
-            // client: JSON.parse(JSON.parse(client)),
-            // items: JSON.parse(JSON.parse(items)),
-            // paymentSchedule: JSON.parse(JSON.parse(paymentSchedule)),
-            // contract: JSON.parse(JSON.parse(contract)),
-
             client: JSON.parse(client),
             items: JSON.parse(items),
             paymentSchedule: JSON.parse(paymentSchedule),
@@ -54,7 +49,7 @@ class EstimateController {
             tax,
             amountTotal,
             notes,
-            estimateDocID,
+            docID,
             date,
             po,
             states,
@@ -108,7 +103,7 @@ class EstimateController {
             estimateID,
             client, items, subTotal, tax, amountTotal,
             paymentSchedule, notes,
-            contract, estimateDocID, date, po, states, states_name,
+            contract, docID, date, po, states, states_name,
         } = request.body
 
         var detailsMe
@@ -123,11 +118,6 @@ class EstimateController {
         }
 
         const dictToSave = {
-            // client: JSON.parse(JSON.parse(client)),
-            // items: JSON.parse(JSON.parse(items)),
-            // paymentSchedule: JSON.parse(JSON.parse(paymentSchedule)),
-            // contract: JSON.parse(JSON.parse(contract)),
-
             client: JSON.parse(client),
             items: JSON.parse(items),
             paymentSchedule: JSON.parse(paymentSchedule),
@@ -137,7 +127,7 @@ class EstimateController {
             tax,
             amountTotal,
             notes,
-            estimateDocID,
+            docID,
             date,
             po,
             states,

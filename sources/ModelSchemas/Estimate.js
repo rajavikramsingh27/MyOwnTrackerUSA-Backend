@@ -13,7 +13,7 @@ const estimate = mongoose.Schema({
         paymentSchedule: Object,
         notes: String,
         contract: Object,
-        estimateDocID: String,
+        docID: String,
         date: String,
         po: String,
         states_name: String,
