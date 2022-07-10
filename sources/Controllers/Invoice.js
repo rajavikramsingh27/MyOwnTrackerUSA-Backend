@@ -9,7 +9,7 @@ class InvoiceController {
         const {
             client, items, subTotal, tax, amountTotal,
             paymentSchedule, notes,
-            contract, docID, date, po, states, states_name
+            contract, docID, date, po, states, states_name, signature
         } = request.body
 
         var detailsMe
@@ -44,6 +44,7 @@ class InvoiceController {
             items: JSON.parse(items),
             paymentSchedule: JSON.parse(paymentSchedule),
             contract: JSON.parse(contract),
+            signature: JSON.parse(signature),
 
             subTotal,
             tax,
@@ -233,6 +234,41 @@ console.log(dictToSave);
                 'Invoice is updated successfully.',
                 data,
             ))
+        } catch (error) {
+            return response.json(Response.fail(
+                'Error in findOneAndUpdate',
+                error.message,
+            ))
+        }
+    }
+
+    async updateInvoiceSignature(request, response) {
+        const {
+            invoiceID,
+            signature,
+        } = request.body
+
+        try {
+            const data = await Invoice.findOneAndUpdate(
+                {
+                    'userID': request.user.id,
+                    "invoice._id": invoiceID
+                }, {
+                $set: {
+                    "invoice.$.signature": signature
+                }
+            }, {
+                new: true
+            })
+
+            for (let i = 0; i < data.invoice.length; i++) {
+                if (data.invoice[i]._id == invoiceID) {
+                    return response.json(Response.success(
+                        'Invoice is updated successfully.',
+                        data.invoice[i],
+                    ))
+                }
+            }
         } catch (error) {
             return response.json(Response.fail(
                 'Error in findOneAndUpdate',

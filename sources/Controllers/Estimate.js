@@ -276,7 +276,7 @@ class EstimateController {
             }, {
                 new: true
             })
-            console.log(data.estimate.length);
+            
             for (let i = 0; i < data.estimate.length; i++) {
                 if (data.estimate[i]._id == estimateID) {
                     return response.json(Response.success(

@@ -13,6 +13,7 @@ const invoice = mongoose.Schema({
         paymentSchedule: Object,
         notes: String,
         contract: Object,
+        signature: Object,
         docID: String,
         date: String,
         po: String,
