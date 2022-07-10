@@ -9,7 +9,7 @@ class EstimateController {
         const {
             client, items, subTotal, tax, amountTotal,
             paymentSchedule, notes,
-            contract, docID, date, po, states, states_name
+            contract, docID, date, po, states, states_name, signature
         } = request.body
 
         var detailsMe
@@ -44,6 +44,7 @@ class EstimateController {
             items: JSON.parse(items),
             paymentSchedule: JSON.parse(paymentSchedule),
             contract: JSON.parse(contract),
+            signature: JSON.parse(signature),
 
             subTotal,
             tax,
@@ -103,7 +104,7 @@ class EstimateController {
             estimateID,
             client, items, subTotal, tax, amountTotal,
             paymentSchedule, notes,
-            contract, docID, date, po, states, states_name,
+            contract, docID, date, po, states, states_name, signature
         } = request.body
 
         var detailsMe
@@ -122,6 +123,7 @@ class EstimateController {
             items: JSON.parse(items),
             paymentSchedule: JSON.parse(paymentSchedule),
             contract: JSON.parse(contract),
+            signature: JSON.parse(signature),
 
             subTotal,
             tax,
