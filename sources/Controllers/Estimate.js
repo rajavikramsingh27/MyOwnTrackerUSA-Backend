@@ -248,6 +248,47 @@ class EstimateController {
         }
     }
 
+    async updateEstimateSignature(request, response) {
+        const {
+            estimateID, signature
+        } = request.body
+
+        var detailsMe
+
+        try {
+            detailsMe = await Estimate.findOne({ 'userID': request.user.id })
+        } catch (error) {
+            return response.json(Response.fail(
+                'Error in findOne',
+                error.message,
+            ))
+        }
+        
+        try {
+            const data = await Estimate.findOneAndUpdate(
+                {
+                    'userID': request.user.id,
+                    "estimate._id": estimateID
+                }, {
+                $set: {
+                    "estimate.$.signature": JSON.parse(signature)
+                }
+            }, {
+                new: true
+            })
+
+            return response.json(Response.success(
+                'Estimate is updated successfully.',
+                data,
+            ))
+        } catch (error) {
+            return response.json(Response.fail(
+                'Error in findOneAndUpdate',
+                error.message,
+            ))
+        }
+    }
+
     async deleteEstimate(request, response) {
         const { estimateID } = request.body
 
