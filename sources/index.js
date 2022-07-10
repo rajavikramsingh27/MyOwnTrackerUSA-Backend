@@ -43,13 +43,13 @@ app.use(routerPayment)
 
 app.post("/uploadImage", (request, response, next) => {
     request.file = request.files.image
-    const allowedExtensions = /png|jpeg|jpg/
+    // const allowedExtensions = /png|jpeg|jpg/
 
-    if (!allowedExtensions.test(path.extname(request.file.name))) {
-        return response.json(Response.fail(
-            'Extension must be ' + allowedExtensions.toString() + ' format',
-        ))
-    }
+    // if (!allowedExtensions.test(path.extname(request.file.name))) {
+    //     return response.json(Response.fail(
+    //         'Extension must be ' + allowedExtensions.toString() + ' format',
+    //     ))
+    // }
 
     FileUpload.uploadFile(request, response, next, async function (pictureURL) {
         console.log(pictureURL);
