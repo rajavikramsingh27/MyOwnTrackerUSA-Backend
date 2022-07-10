@@ -38,7 +38,7 @@ class EstimateController {
                 ))
             }
         }
-        
+
         const dictToSave = {
             client: JSON.parse(client),
             items: JSON.parse(items),
@@ -263,7 +263,7 @@ class EstimateController {
                 error.message,
             ))
         }
-        
+
         try {
             const data = await Estimate.findOneAndUpdate(
                 {
@@ -276,11 +276,15 @@ class EstimateController {
             }, {
                 new: true
             })
-
-            return response.json(Response.success(
-                'Estimate is updated successfully.',
-                data,
-            ))
+            console.log(data.estimate.length);
+            for (let i = 0; i < data.estimate.length; i++) {
+                if (data.estimate[i]._id == estimateID) {
+                    return response.json(Response.success(
+                        'Estimate is updated successfully.',
+                        data.estimate[i],
+                    ))
+                }
+            }
         } catch (error) {
             return response.json(Response.fail(
                 'Error in findOneAndUpdate',
