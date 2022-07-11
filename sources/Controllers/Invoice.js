@@ -102,7 +102,7 @@ console.log(dictToSave);
             invoiceID,
             client, items, subTotal, tax, amountTotal,
             paymentSchedule, notes,
-            contract, docID, date, po, states, states_name, , signature
+            contract, docID, date, po, states, states_name, signature
         } = request.body
 
         var detailsMe
