@@ -252,18 +252,7 @@ class EstimateController {
         const {
             estimateID, signature
         } = request.body
-
-        var detailsMe
-
-        try {
-            detailsMe = await Estimate.findOne({ 'userID': request.user.id })
-        } catch (error) {
-            return response.json(Response.fail(
-                'Error in findOne',
-                error.message,
-            ))
-        }
-
+        
         try {
             const data = await Estimate.findOneAndUpdate(
                 {

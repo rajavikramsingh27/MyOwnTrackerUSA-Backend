@@ -272,7 +272,7 @@ console.log(dictToSave);
                     "invoice._id": invoiceID
                 }, {
                 $set: {
-                    "invoice.$.signature": signature
+                    "invoice.$.signature": JSON.parse(signature)
                 }
             }, {
                 new: true
