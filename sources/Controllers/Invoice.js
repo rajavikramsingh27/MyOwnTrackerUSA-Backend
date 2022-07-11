@@ -249,6 +249,22 @@ console.log(dictToSave);
             signature,
         } = request.body
 
+
+        console.log(request.user.id);
+        console.log(invoiceID);
+
+        var detailsMe
+
+        try {
+            detailsMe = await Invoice.findOne({ 'userID': request.user.id, "invoice._id": invoiceID })
+            console.log(detailsMe);
+        } catch (error) {
+            return response.json(Response.fail(
+                'Error in findOne',
+                error.message,
+            ))
+        }
+
         try {
             const data = await Invoice.findOneAndUpdate(
                 {
